@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Peaceful Path – Yoga & Recovery Gear</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">🧘 Peaceful Path</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#" id="cart-btn">Cart (0)</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Balance. Recover. Restore.</h1>
+      <p>High-quality yoga and recovery gear designed for your well-being.</p>
+      <a href="#shop" class="btn">Shop Now</a>
+    </div>
+  </section>
+
+  <section id="shop" class="products">
+    <h2>Our Bestsellers</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="images/yoga-mat.jpg" alt="Eco Yoga Mat">
+        <h3>Eco Yoga Mat</h3>
+        <p>£39.99</p>
+        <button class="btn add-to-cart" data-name="Eco Yoga Mat" data-price="39.99">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/foam-roller.jpg" alt="Deep Tissue Foam Roller">
+        <h3>Deep Tissue Foam Roller</h3>
+        <p>£24.99</p>
+        <button class="btn add-to-cart" data-name="Deep Tissue Foam Roller" data-price="24.99">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/acupressure-mat.jpg" alt="Acupressure Mat Set">
+        <h3>Acupressure Mat Set</h3>
+        <p>£34.99</p>
+        <button class="btn add-to-cart" data-name="Acupressure Mat Set" data-price="34.99">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Peaceful Path. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Shopping cart functionality
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Update cart button count
+    const updateCartButton = () => {
+      const cartBtn = document.getElementById('cart-btn');
+      cartBtn.innerText = `Cart (${cart.length})`;
+    };
+
+    // Add item to cart
+    const addToCart = (name, price) => {
+      cart.push({ name, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartButton();
+    };
+
+    // Attach event listeners to all "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', () => {
+        const name = button.dataset.name;
+        const price = parseFloat(button.dataset.price);
+        addToCart(name, price);
+      });
+    });
+
+    updateCartButton();  // Initialize cart count
+  </script>
+</body>
+</html>
